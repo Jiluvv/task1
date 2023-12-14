@@ -1,0 +1,31 @@
+field = [["-" for _ in range(3)] for _ in range(3)]
+def print_field():
+    for row in field:
+        print(" ".join(row))
+
+def check_winner(player):
+current_player = "X"
+while True:
+    print_field()
+    print(f"Ход игрока {current_player}")
+    
+   
+row, col = map(int, input("Введите номер строки и столбца через пробел (0-2): ").split())
+    
+     if field[row][col] != "-":
+        print("Эта клетка уже занята, выберите другую.")
+        continue
+    
+field[row][col] = current_player
+    
+     if check_winner(current_player):
+        print_field()
+        print(f"Игрок {current_player} победил!")
+        break
+    elif all(all(cell != "-" for cell in row) for row in field):
+        print_field()
+        print("Ничья!")
+        break
+    
+    
+current_player = "O" if current_player == "X" else "X"
